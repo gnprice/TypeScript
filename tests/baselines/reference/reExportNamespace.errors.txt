@@ -1,0 +1,19 @@
+tests/cases/conformance/externalModules/d.ts(3,7): error TS2322: Type 'number' is not assignable to type 'string'.
+
+
+==== tests/cases/conformance/externalModules/a.ts (0 errors) ====
+    export type T = string;
+    
+==== tests/cases/conformance/externalModules/b.ts (0 errors) ====
+    export * as A from './a';
+    
+==== tests/cases/conformance/externalModules/c.ts (0 errors) ====
+    export * as B from './b';
+    
+==== tests/cases/conformance/externalModules/d.ts (1 errors) ====
+    import * as C from './c';
+    const x: C.B.A.T = 'x';
+    const y: C.B.A.T = 3;
+          ~
+!!! error TS2322: Type 'number' is not assignable to type 'string'.
+    

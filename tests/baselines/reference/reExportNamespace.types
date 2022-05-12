@@ -1,0 +1,30 @@
+=== tests/cases/conformance/externalModules/a.ts ===
+export type T = string;
+>T : string
+
+=== tests/cases/conformance/externalModules/b.ts ===
+export * as A from './a';
+>A : typeof import("tests/cases/conformance/externalModules/a")
+
+=== tests/cases/conformance/externalModules/c.ts ===
+export * as B from './b';
+>B : typeof import("tests/cases/conformance/externalModules/b")
+
+=== tests/cases/conformance/externalModules/d.ts ===
+import * as C from './c';
+>C : typeof C
+
+const x: C.B.A.T = 'x';
+>x : string
+>C : any
+>B : any
+>A : any
+>'x' : "x"
+
+const y: C.B.A.T = 3;
+>y : string
+>C : any
+>B : any
+>A : any
+>3 : 3
+
